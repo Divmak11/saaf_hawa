@@ -5,6 +5,7 @@ from motor.motor_asyncio import AsyncIOMotorClient
 import os
 import logging
 from pathlib import Path
+import certifi
 from pydantic import BaseModel, Field, ConfigDict
 from typing import List
 import uuid
@@ -16,7 +17,13 @@ load_dotenv(ROOT_DIR / '.env')
 
 # MongoDB connection
 mongo_url = os.environ['MONGO_URL']
-client = AsyncIOMotorClient(mongo_url)
+# Add TLS options for compatibility with Python 3.13 on Railway
+client = AsyncIOMotorClient(
+    mongo_url,
+    tls=True,
+    tlsCAFile=certifi.where(),
+    serverSelectionTimeoutMS=30000
+)
 db = client[os.environ['DB_NAME']]
 
 # Create the main app without a prefix
