@@ -1,0 +1,53 @@
+/* Smooth scroll behavior */
+html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    width: 100%;
+}
+
+/* Remove default margin and prevent horizontal scroll */
+body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden !important;
+    width: 100%;
+    max-width: 100vw;
+    position: relative;
+}
+
+/* Prevent all elements from causing overflow */
+* {
+    box-sizing: border-box;
+}
+
+/* Additional overflow prevention */
+#root {
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100vw;
+}
+
+.App {
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100vw;
+}
+
+/* Specific transitions for interactive elements */
+button, input, a {
+    transition: color 0.3s ease, background-color 0.3s ease, opacity 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* No universal transitions to avoid breaking transforms */
+
+/* Fix for mobile images */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Ensure no section causes overflow */
+section {
+    overflow-x: hidden;
+    max-width: 100%;
+}
