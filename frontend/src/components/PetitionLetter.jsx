@@ -30,11 +30,11 @@ const PetitionLetter = ({ onSignClick }) => {
               </p>
 
               <p className="font-bold text-xl bg-black text-white p-6 rounded-lg">
-                Please stop hiding the reality of our air. Please stop softening or manipulating AQI data.
+                Please don't hide the reality of our air. Please ensure that AQI data is not manipulated.
               </p>
 
               <p>
-                Give us the truth so we can protect our children and elders. Treat this as the health emergency it is. Delhi deserves honest data and real action. We want you to act.
+                Give us the truth so we can protect our children and elders. Treat this as the health emergency it is. Delhi deserves honest data and real action. We want you to act and take strong measures rather than Band-Aid solutions.
               </p>
 
               <p className="font-bold text-xl">
