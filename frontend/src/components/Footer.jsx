@@ -34,9 +34,9 @@ const Footer = () => {
           <div>
             <h4 className="text-lg font-black mb-4 text-gray-300">Connect & Share</h4>
             <div className="space-y-3">
-              <a href="mailto:contact@saafhawa.org" className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors">
+              <a href="mailto:contact@saafhawa.in" className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors">
                 <Mail className="w-5 h-5" />
-                contact@saafhawa.org
+                contact@saafhawa.in
               </a>
               <button className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors">
                 <Share2 className="w-5 h-5" />

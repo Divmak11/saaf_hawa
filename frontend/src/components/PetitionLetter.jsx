@@ -26,7 +26,7 @@ const PetitionLetter = ({ onSignClick }) => {
 
             <div className="space-y-6 text-lg leading-relaxed">
               <p className="font-semibold">
-                I am signing this because the air in Delhi has become a daily health threat for my family. The coughing, the burning throat, the breathlessness—these are now part of our lives. What makes it worse is that the AQI shown to us often does not match what we feel in our lungs.
+                I am signing this because the air in Delhi has become a daily health threat for my family. The coughing, the burning throat, the breathlessness, these are now part of our lives. What makes it worse is that the AQI shown to us often does not match what we feel in our lungs.
               </p>
 
               <p className="font-bold text-xl bg-black text-white p-6 rounded-lg">

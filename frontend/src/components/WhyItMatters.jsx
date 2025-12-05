@@ -52,8 +52,11 @@ const WhyItMatters = () => {
           <h3 className="text-3xl md:text-4xl font-black mb-4">
             Don't Wait for Someone Else to Act
           </h3>
-          <p className="text-xl mb-8 text-gray-300">
+          <p className="text-xl mb-4 text-gray-300">
             Change starts when citizens stand together. Your signature is your voice.
+          </p>
+          <p className="text-xl mb-8 text-gray-300">
+            Give a Missed Call to <a href="tel:+919873036161" className="text-white font-bold underline hover:text-gray-200">+91 9873036161</a>
           </p>
           <a 
             href="#signature-form"
