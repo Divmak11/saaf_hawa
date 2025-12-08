@@ -68,7 +68,7 @@ class ImageService:
         # Letter content with better formatting
         letter_paragraphs = [
             "I am signing this because the air in Delhi has become a daily health threat for my family. The coughing, the burning throat, the breathlessness, these are now part of our lives. What makes it worse is that the AQI shown to us often does not match what we feel in our lungs.",
-            "Please don't hiding the reality of our air. Please ensure that AQI data is not manipulated.",
+            "Please don't hide the reality of our air. Please ensure that AQI data is not manipulated.",
             "give us the truth so we can protect our children and elders. Treat this as the health emergency it is. Delhi deserves honest data and real action. We want you to act and take strong measures rather than Band-Aid solutions.",
             "Clean air is my fundamental right. Please protect it."
         ]

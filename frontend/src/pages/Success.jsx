@@ -158,7 +158,7 @@ const Success = () => {
             </p>
 
             <p className="font-bold text-xl">
-              Please don't hiding the reality of our air. Please ensure that AQI data is not manipulated.
+              Please don't hide the reality of our air. Please ensure that AQI data is not manipulated.
             </p>
 
             <p>
