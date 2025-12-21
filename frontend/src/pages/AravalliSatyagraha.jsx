@@ -184,7 +184,7 @@ export default function AravalliSatyagraha() {
               Save the Aravallis
             </h2>
             <p className="text-base md:text-xl text-white/95 max-w-3xl mx-auto mb-6 md:mb-8 leading-relaxed font-light">
-              India's oldest mountain range is facing a death sentence. A Supreme Court decision from November 20, 2025, removes protection from 90% of the Aravallis using an unscientific 100-metre height rule.
+              A Supreme Court decision based on a Govt proposal removes protection from 90% of the Aravallis through an unscientific 100-metre rule, a death sentence for India’s oldest mountain range.
             </p>
             <Button
               onClick={scrollToPetition}
@@ -205,6 +205,47 @@ export default function AravalliSatyagraha() {
           </p>
         </div>
       </div>
+
+      {/* Hindi Section - MOVED DOWN */}
+      <section className="py-12 md:py-20 px-4 bg-gradient-to-br from-amber-50 via-orange-50 to-amber-100 border-y-4 border-orange-600">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-4xl md:text-6xl font-bold text-center text-stone-900 mb-8 md:mb-12" style={{ fontFamily: 'sans-serif' }}>
+            अरावली बचाओ
+          </h2>
+          
+          <Card className="bg-white/90 backdrop-blur-sm border-2 border-orange-300 shadow-2xl">
+            <CardContent className="p-6 md:p-10 space-y-6">
+              <p className="text-xl md:text-2xl font-bold text-red-800 leading-relaxed" style={{ fontFamily: 'sans-serif' }}>
+                माननीय प्रधानमंत्री एवं माननीय नेता प्रतिपक्ष,
+              </p>
+              
+              <div className="space-y-5 text-base md:text-lg text-stone-800 leading-relaxed" style={{ fontFamily: 'sans-serif' }}>
+                <p>
+                  यह याचिका आने वाली पीढ़ियों की ओर से किया गया एक आवश्यक आग्रह है। अरावली पर्वतमाला भारत की सबसे प्राचीन पर्वत श्रृंखला है, जो गुजरात से राजस्थान, हरियाणा और दिल्ली तक फैली है। यह उत्तर भारत को मरुस्थलीकरण से बचाने वाली प्राकृतिक ढाल है और भूजल, हवा व तापमान के संतुलन में इसकी भूमिका अत्यंत महत्वपूर्ण है। आज अवैध खनन, वनों की कटाई और अनियंत्रित निर्माण के कारण अरावली का अस्तित्व गंभीर संकट में है।
+                </p>
+                
+                <p className="bg-orange-50 p-4 rounded-lg border-l-4 border-orange-600">
+                  सुप्रीम कोर्ट को गुमराह कर अरावली की परिभाषा को संकुचित किया जाना माइनिंग माफिया को लाभ पहुँचाने वाला कदम है। अरावली को केवल खनिज क्षेत्र नहीं बल्कि एक जीवित पारिस्थितिकी तंत्र मानते हुए उसका संरक्षण आवश्यक है। अरावली को बचाना जल संकट, वायु प्रदूषण और जलवायु परिवर्तन से लड़ने का मूल उपाय है।
+                </p>
+                
+                <p className="font-semibold text-lg md:text-xl text-stone-900">
+                  हम आपसे आग्रह करते हैं कि सख़्त क़ानूनी संरक्षण और त्वरित ज़मीनी कार्रवाई के माध्यम से इस ऐतिहासिक पर्वतमाला को बचाया जाए।
+                </p>
+              </div>
+              
+              <div className="text-center pt-4">
+                <Button
+                  onClick={scrollToPetition}
+                  className="bg-gradient-to-r from-orange-700 to-red-700 hover:from-orange-800 hover:to-red-800 text-white px-8 md:px-12 py-5 md:py-7 text-lg md:text-2xl font-bold shadow-2xl"
+                  style={{ fontFamily: 'sans-serif' }}
+                >
+                  अभी हस्ताक्षर करें
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </section>
 
       {/* Petition Form - MOVED HERE */}
       <section className="py-12 md:py-20 px-4 bg-gradient-to-b from-stone-50 to-white" id="petition">
@@ -274,47 +315,6 @@ export default function AravalliSatyagraha() {
                   {loading ? 'Submitting...' : 'Add My Name to Save the Aravallis'}
                 </Button>
               </form>
-            </CardContent>
-          </Card>
-        </div>
-      </section>
-
-      {/* Hindi Section - MOVED UP */}
-      <section className="py-12 md:py-20 px-4 bg-gradient-to-br from-amber-50 via-orange-50 to-amber-100 border-y-4 border-orange-600">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-4xl md:text-6xl font-bold text-center text-stone-900 mb-8 md:mb-12" style={{ fontFamily: 'sans-serif' }}>
-            अरावली बचाओ
-          </h2>
-          
-          <Card className="bg-white/90 backdrop-blur-sm border-2 border-orange-300 shadow-2xl">
-            <CardContent className="p-6 md:p-10 space-y-6">
-              <p className="text-xl md:text-2xl font-bold text-red-800 leading-relaxed" style={{ fontFamily: 'sans-serif' }}>
-                माननीय प्रधानमंत्री एवं माननीय नेता प्रतिपक्ष,
-              </p>
-              
-              <div className="space-y-5 text-base md:text-lg text-stone-800 leading-relaxed" style={{ fontFamily: 'sans-serif' }}>
-                <p>
-                  यह याचिका आने वाली पीढ़ियों की ओर से किया गया एक आवश्यक आग्रह है। अरावली पर्वतमाला भारत की सबसे प्राचीन पर्वत श्रृंखला है, जो गुजरात से राजस्थान, हरियाणा और दिल्ली तक फैली है। यह उत्तर भारत को मरुस्थलीकरण से बचाने वाली प्राकृतिक ढाल है और भूजल, हवा व तापमान के संतुलन में इसकी भूमिका अत्यंत महत्वपूर्ण है। आज अवैध खनन, वनों की कटाई और अनियंत्रित निर्माण के कारण अरावली का अस्तित्व गंभीर संकट में है।
-                </p>
-                
-                <p className="bg-orange-50 p-4 rounded-lg border-l-4 border-orange-600">
-                  सुप्रीम कोर्ट को गुमराह कर अरावली की परिभाषा को संकुचित किया जाना माइनिंग माफिया को लाभ पहुँचाने वाला कदम है। अरावली को केवल खनिज क्षेत्र नहीं बल्कि एक जीवित पारिस्थितिकी तंत्र मानते हुए उसका संरक्षण आवश्यक है। अरावली को बचाना जल संकट, वायु प्रदूषण और जलवायु परिवर्तन से लड़ने का मूल उपाय है।
-                </p>
-                
-                <p className="font-semibold text-lg md:text-xl text-stone-900">
-                  हम आपसे आग्रह करते हैं कि सख़्त क़ानूनी संरक्षण और त्वरित ज़मीनी कार्रवाई के माध्यम से इस ऐतिहासिक पर्वतमाला को बचाया जाए।
-                </p>
-              </div>
-              
-              <div className="text-center pt-4">
-                <Button
-                  onClick={scrollToPetition}
-                  className="bg-gradient-to-r from-orange-700 to-red-700 hover:from-orange-800 hover:to-red-800 text-white px-8 md:px-12 py-5 md:py-7 text-lg md:text-2xl font-bold shadow-2xl"
-                  style={{ fontFamily: 'sans-serif' }}
-                >
-                  अभी हस्ताक्षर करें
-                </Button>
-              </div>
             </CardContent>
           </Card>
         </div>
