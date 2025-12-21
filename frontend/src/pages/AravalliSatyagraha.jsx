@@ -159,7 +159,10 @@ export default function AravalliSatyagraha() {
       {/* Fixed Header */}
       <header className="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-sm border-b border-stone-300 z-50 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 md:py-4 flex justify-between items-center">
-          <h1 className="text-xl md:text-2xl font-serif font-bold text-stone-900">Save the Aravallis</h1>
+          <div className='flex items-center gap-4'>
+            <img className='w-12 h-12 rounded-md' src='/logo_aravalli.jpeg' />
+            <h1 className="text-xl md:text-2xl font-serif font-bold text-stone-900">Save the Aravallis</h1>
+          </div>
           <Button 
             onClick={scrollToPetition}
             className="bg-red-700 hover:bg-red-800 text-white font-semibold px-4 md:px-6 py-2 shadow-lg"
