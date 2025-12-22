@@ -15,6 +15,10 @@ export default function AravalliSatyagraha() {
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState('');
+  const [certificates, setCertificates] = useState({
+    url: "",
+    name: ""
+  });
 
   useEffect(() => {
     fetchCount();
@@ -30,63 +34,117 @@ export default function AravalliSatyagraha() {
     }
   };
 
-  const generateCertificate = (name) => {
-    const doc = new jsPDF({
-      orientation: 'landscape',
-      unit: 'mm',
-      format: 'a4'
-    });
+  // const generateCertificate = (name) => {
+  //   const doc = new jsPDF({
+  //     orientation: 'landscape',
+  //     unit: 'mm',
+  //     format: 'a4'
+  //   });
 
-    const pageWidth = doc.internal.pageSize.getWidth();
-    const pageHeight = doc.internal.pageSize.getHeight();
+  //   const pageWidth = doc.internal.pageSize.getWidth();
+  //   const pageHeight = doc.internal.pageSize.getHeight();
 
-    doc.setLineWidth(1);
-    doc.setFillColor(26, 77, 46);
-    doc.rect(0, 0, pageWidth, 15, 'F');
-    doc.rect(0, pageHeight - 15, pageWidth, 15, 'F');
+  //   doc.setLineWidth(1);
+  //   doc.setFillColor(26, 77, 46);
+  //   doc.rect(0, 0, pageWidth, 15, 'F');
+  //   doc.rect(0, pageHeight - 15, pageWidth, 15, 'F');
 
-    doc.setLineWidth(0.8);
-    doc.setDrawColor(26, 77, 46);
-    doc.rect(8, 8, pageWidth - 16, pageHeight - 16);
+  //   doc.setLineWidth(0.8);
+  //   doc.setDrawColor(26, 77, 46);
+  //   doc.rect(8, 8, pageWidth - 16, pageHeight - 16);
 
-    doc.setTextColor(26, 77, 46);
-    doc.setFontSize(32);
-    doc.setFont('helvetica', 'bold');
-    doc.text('CERTIFICATE OF SUPPORT', pageWidth / 2, 35, { align: 'center' });
+  //   doc.setTextColor(26, 77, 46);
+  //   doc.setFontSize(32);
+  //   doc.setFont('helvetica', 'bold');
+  //   doc.text('CERTIFICATE OF SUPPORT', pageWidth / 2, 35, { align: 'center' });
 
-    doc.setFontSize(16);
-    doc.setFont('helvetica', 'normal');
-    doc.text('Save the Aravallis Campaign', pageWidth / 2, 48, { align: 'center' });
+  //   doc.setFontSize(16);
+  //   doc.setFont('helvetica', 'normal');
+  //   doc.text('Save the Aravallis Campaign', pageWidth / 2, 48, { align: 'center' });
 
-    doc.setTextColor(60, 60, 60);
-    doc.setFontSize(12);
-    doc.text('This certifies that', pageWidth / 2, 70, { align: 'center' });
+  //   doc.setTextColor(60, 60, 60);
+  //   doc.setFontSize(12);
+  //   doc.text('This certifies that', pageWidth / 2, 70, { align: 'center' });
 
-    doc.setFontSize(28);
-    doc.setFont('helvetica', 'bold');
-    doc.setTextColor(26, 77, 46);
-    doc.text(name, pageWidth / 2, 85, { align: 'center' });
+  //   doc.setFontSize(28);
+  //   doc.setFont('helvetica', 'bold');
+  //   doc.setTextColor(26, 77, 46);
+  //   doc.text(name, pageWidth / 2, 85, { align: 'center' });
 
-    doc.setFontSize(12);
-    doc.setFont('helvetica', 'normal');
-    doc.setTextColor(60, 60, 60);
-    const statement = 'has signed the petition to protect India\'s oldest mountain range';
-    doc.text(statement, pageWidth / 2, 100, { align: 'center' });
-    doc.text('from illegal mining and ecological destruction.', pageWidth / 2, 108, { align: 'center' });
+  //   doc.setFontSize(12);
+  //   doc.setFont('helvetica', 'normal');
+  //   doc.setTextColor(60, 60, 60);
+  //   const statement = 'has signed the petition to protect India\'s oldest mountain range';
+  //   doc.text(statement, pageWidth / 2, 100, { align: 'center' });
+  //   doc.text('from illegal mining and ecological destruction.', pageWidth / 2, 108, { align: 'center' });
 
-    doc.setFontSize(10);
-    const message = 'Your voice joins thousands demanding immediate action to save the Aravallis.';
-    doc.text(message, pageWidth / 2, 125, { align: 'center' });
+  //   doc.setFontSize(10);
+  //   const message = 'Your voice joins thousands demanding immediate action to save the Aravallis.';
+  //   doc.text(message, pageWidth / 2, 125, { align: 'center' });
 
-    doc.setFontSize(11);
-    const today = new Date().toLocaleDateString('en-IN', {
-      day: 'numeric',
-      month: 'long',
-      year: 'numeric'
-    });
-    doc.text(`Date: ${today}`, pageWidth / 2, 145, { align: 'center' });
+  //   doc.setFontSize(11);
+  //   const today = new Date().toLocaleDateString('en-IN', {
+  //     day: 'numeric',
+  //     month: 'long',
+  //     year: 'numeric'
+  //   });
+  //   doc.text(`Date: ${today}`, pageWidth / 2, 145, { align: 'center' });
 
-    doc.save(`Save_Aravallis_Certificate_${name.replace(/\s+/g, '_')}.pdf`);
+  //   doc.save(`Save_Aravallis_Certificate_${name.replace(/\s+/g, '_')}.pdf`);
+  // };
+
+  const generateCertificate = async (name) => {
+    try {
+      // Create canvas
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+
+      if (!ctx) return null;
+
+      // Load the certificate template using native HTML Image constructor
+      const templateImage = new (globalThis.Image || HTMLImageElement)();
+      templateImage.crossOrigin = 'anonymous';
+
+      return new Promise((resolve, reject) => {
+        templateImage.onload = () => {
+          // Set canvas size to match image
+          canvas.width = templateImage.width;
+          canvas.height = templateImage.height;
+
+          // Draw the certificate template
+          ctx.drawImage(templateImage, 0, 0);
+
+          // Configure text styling for name
+          ctx.fillStyle = '#155811'; // Black color
+          ctx.font = 'bold 140px Arial';
+          ctx.textAlign = 'center';
+
+          // Calculate position (25% from top)
+          const nameX = canvas.width / 2;
+          const nameY = canvas.height * 0.56;
+
+          // Add user name to certificate
+          ctx.fillText(name, nameX, nameY);
+
+          // Convert to blob and create URL
+          canvas.toBlob((blob) => {
+            if (blob) {
+              const url = URL.createObjectURL(blob);
+              resolve(url);
+            } else {
+              reject(new Error('Failed to create blob'));
+            }
+          }, 'image/png', 0.9);
+        };
+
+        templateImage.onerror = () => reject(new Error('Failed to load certificate template'));
+        // Use PNG/JPG format instead of PDF for canvas compatibility
+        templateImage.src = '/Certificate Aravali.png';
+      });
+    } catch (error) {
+      console.error('Certificate generation error:', error);
+      return null;
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -109,15 +167,29 @@ export default function AravalliSatyagraha() {
 
       setSubmitted(true);
       await fetchCount();
-      
-      setTimeout(() => {
-        generateCertificate(name);
-      }, 500);
+
+      if (data.status === 'success') {
+        const certificateDataUrl = await generateCertificate(name);
+        if (certificateDataUrl) {
+          setCertificates({ url: certificateDataUrl, name: name });
+        }
+      }
 
     } catch (error) {
       setError(error.message);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const downloadCertificate = (certificateUrl, userName) => {
+    if (certificateUrl && userName) {
+      const link = document.createElement('a');
+      link.href = certificateUrl;
+      link.download = `${userName}_Certificate.png`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
     }
   };
 
@@ -140,8 +212,18 @@ export default function AravalliSatyagraha() {
               Your signature has been recorded. Together, we are building a movement to protect the Aravallis.
             </p>
             <p className="text-sm text-gray-600">
-              Your certificate of participation is downloading now.
+              Your Certificate of Participation is ready for download. Click the button below.
             </p>
+            
+              <button
+                onClick={() => downloadCertificate(certificates.url, certificates.name || 'certificate')}
+                className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-4 py-2 rounded-lg transition-all shadow-md flex items-center gap-2 mx-auto"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                Download Certificate
+              </button>
             <Button
               onClick={() => window.location.reload()}
               className="mt-6 bg-green-800 hover:bg-green-900 text-white px-8 py-6 text-lg"
@@ -163,7 +245,7 @@ export default function AravalliSatyagraha() {
             <img className='w-12 h-12 rounded-md' src='/logo_aravalli.jpeg' />
             <h1 className="text-xl md:text-2xl font-serif font-bold text-stone-900">Save the Aravallis</h1>
           </div>
-          <Button 
+          <Button
             onClick={scrollToPetition}
             className="bg-red-700 hover:bg-red-800 text-white font-semibold px-4 md:px-6 py-2 shadow-lg"
           >
@@ -212,27 +294,27 @@ export default function AravalliSatyagraha() {
           <h2 className="text-4xl md:text-6xl font-bold text-center text-stone-900 mb-8 md:mb-12" style={{ fontFamily: 'sans-serif' }}>
             अरावली बचाओ
           </h2>
-          
+
           <Card className="bg-white/90 backdrop-blur-sm border-2 border-orange-300 shadow-2xl">
             <CardContent className="p-6 md:p-10 space-y-6">
               <p className="text-xl md:text-2xl font-bold text-red-800 leading-relaxed" style={{ fontFamily: 'sans-serif' }}>
                 माननीय प्रधानमंत्री एवं माननीय नेता प्रतिपक्ष,
               </p>
-              
+
               <div className="space-y-5 text-base md:text-lg text-stone-800 leading-relaxed" style={{ fontFamily: 'sans-serif' }}>
                 <p>
                   यह याचिका आने वाली पीढ़ियों की ओर से किया गया एक आवश्यक आग्रह है। अरावली पर्वतमाला भारत की सबसे प्राचीन पर्वत श्रृंखला है, जो गुजरात से राजस्थान, हरियाणा और दिल्ली तक फैली है। यह उत्तर भारत को मरुस्थलीकरण से बचाने वाली प्राकृतिक ढाल है और भूजल, हवा व तापमान के संतुलन में इसकी भूमिका अत्यंत महत्वपूर्ण है। आज अवैध खनन, वनों की कटाई और अनियंत्रित निर्माण के कारण अरावली का अस्तित्व गंभीर संकट में है।
                 </p>
-                
+
                 <p className="bg-orange-50 p-4 rounded-lg border-l-4 border-orange-600">
                   सुप्रीम कोर्ट को गुमराह कर अरावली की परिभाषा को संकुचित किया जाना माइनिंग माफिया को लाभ पहुँचाने वाला कदम है। अरावली को केवल खनिज क्षेत्र नहीं बल्कि एक जीवित पारिस्थितिकी तंत्र मानते हुए उसका संरक्षण आवश्यक है। अरावली को बचाना जल संकट, वायु प्रदूषण और जलवायु परिवर्तन से लड़ने का मूल उपाय है।
                 </p>
-                
+
                 <p className="font-semibold text-lg md:text-xl text-stone-900">
                   हम आपसे आग्रह करते हैं कि सख़्त क़ानूनी संरक्षण और त्वरित ज़मीनी कार्रवाई के माध्यम से इस ऐतिहासिक पर्वतमाला को बचाया जाए।
                 </p>
               </div>
-              
+
               <div className="text-center pt-4">
                 <Button
                   onClick={scrollToPetition}
@@ -377,9 +459,9 @@ export default function AravalliSatyagraha() {
               </p>
             </div>
             <div>
-              <img 
-                src="https://images.unsplash.com/photo-1549885606-bbc17accf949?w=800" 
-                alt="Cracked earth from drought" 
+              <img
+                src="https://images.unsplash.com/photo-1549885606-bbc17accf949?w=800"
+                alt="Cracked earth from drought"
                 className="w-full h-64 md:h-80 object-cover rounded-lg shadow-xl"
               />
             </div>
@@ -401,17 +483,17 @@ export default function AravalliSatyagraha() {
                   Destruction has already created breaches allowing desert winds and dust into Delhi-NCR. More mining will accelerate desert spread across Rajasthan, Haryana, UP, and MP—threatening food security.
                 </p>
               </div>
-              <img 
-                src="https://images.unsplash.com/photo-1586400792375-d6b8f82db2e6?w=800" 
-                alt="Deforestation" 
+              <img
+                src="https://images.unsplash.com/photo-1586400792375-d6b8f82db2e6?w=800"
+                alt="Deforestation"
                 className="w-full h-48 md:h-64 object-cover rounded-lg shadow-xl order-first md:order-last"
               />
             </div>
 
             <div className="grid md:grid-cols-2 gap-6 items-center">
-              <img 
-                src="https://images.pexels.com/photos/12442838/pexels-photo-12442838.jpeg?auto=compress&cs=tinysrgb&w=800" 
-                alt="Water crisis" 
+              <img
+                src="https://images.pexels.com/photos/12442838/pexels-photo-12442838.jpeg?auto=compress&cs=tinysrgb&w=800"
+                alt="Water crisis"
                 className="w-full h-48 md:h-64 object-cover rounded-lg shadow-xl"
               />
               <div>
@@ -429,17 +511,17 @@ export default function AravalliSatyagraha() {
                   Loss of forest cover increases dust, heat stress, erratic rainfall, and extreme weather. Cities already among the world's most polluted will suffer further.
                 </p>
               </div>
-              <img 
-                src="https://images.unsplash.com/photo-1582377224944-2c2a17affa38?w=800" 
-                alt="Air pollution" 
+              <img
+                src="https://images.unsplash.com/photo-1582377224944-2c2a17affa38?w=800"
+                alt="Air pollution"
                 className="w-full h-48 md:h-64 object-cover rounded-lg shadow-xl order-first md:order-last"
               />
             </div>
 
             <div className="grid md:grid-cols-2 gap-6 items-center">
-              <img 
-                src="https://images.unsplash.com/photo-1589705320079-4fd380c4e9f4?w=800" 
-                alt="Wildlife loss" 
+              <img
+                src="https://images.unsplash.com/photo-1589705320079-4fd380c4e9f4?w=800"
+                alt="Wildlife loss"
                 className="w-full h-48 md:h-64 object-cover rounded-lg shadow-xl"
               />
               <div>
@@ -457,9 +539,9 @@ export default function AravalliSatyagraha() {
                   Communities face falling farm yields, loss of grazing land, cracked homes from blasting, and rising cases of silicosis, asthma, kidney, and liver diseases.
                 </p>
               </div>
-              <img 
-                src="https://images.pexels.com/photos/4129380/pexels-photo-4129380.jpeg?auto=compress&cs=tinysrgb&w=800" 
-                alt="Rural communities affected" 
+              <img
+                src="https://images.pexels.com/photos/4129380/pexels-photo-4129380.jpeg?auto=compress&cs=tinysrgb&w=800"
+                alt="Rural communities affected"
                 className="w-full h-48 md:h-64 object-cover rounded-lg shadow-xl order-first md:order-last"
               />
             </div>
