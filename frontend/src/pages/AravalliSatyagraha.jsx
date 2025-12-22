@@ -6,7 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent } from '@/components/ui/card';
 import { jsPDF } from 'jspdf';
-import { ArrowDown, Users, AlertTriangle, Droplet, Wind, Trees, Heart } from 'lucide-react';
+import { ArrowDown, Users, AlertTriangle, Droplet, Wind, Trees, Heart, Share2, Twitter, Facebook } from 'lucide-react';
 
 export default function AravalliSatyagraha() {
   const [name, setName] = useState('');
@@ -116,7 +116,7 @@ export default function AravalliSatyagraha() {
 
           // Configure text styling for name
           ctx.fillStyle = '#155811'; // Black color
-          ctx.font = 'bold 140px Arial';
+          ctx.font = 'bold 80px Arial';
           ctx.textAlign = 'center';
 
           // Calculate position (25% from top)
@@ -134,12 +134,11 @@ export default function AravalliSatyagraha() {
             } else {
               reject(new Error('Failed to create blob'));
             }
-          }, 'image/png', 0.9);
+          }, 'image/jpeg', 0.9);
         };
 
         templateImage.onerror = () => reject(new Error('Failed to load certificate template'));
-        // Use PNG/JPG format instead of PDF for canvas compatibility
-        templateImage.src = '/Certificate Aravali.png';
+        templateImage.src = '/CertificateAraval.jpeg';
       });
     } catch (error) {
       console.error('Certificate generation error:', error);
@@ -186,12 +185,33 @@ export default function AravalliSatyagraha() {
     if (certificateUrl && userName) {
       const link = document.createElement('a');
       link.href = certificateUrl;
-      link.download = `${userName}_Certificate.png`;
+      link.download = `${userName}_Certificate.jpeg`;
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
     }
   };
+
+  const handleShare = (platform) => {
+    const text = "I’ve signed the *Save the Aravallis* petition to protect this ancient mountain range and the millions of lives it supports.%0a*The Aravallis are under threat* —now is the time to act. Join me!%0a%0a Visit:- https://www.saafhawa.in/AravalliSatyagraha/"
+    
+    let shareUrl = '';
+    switch(platform) {
+      case 'whatsapp':
+        shareUrl = `https://api.whatsapp.com/send?phone=&text=${text}&image=https://res.cloudinary.com/dbjr4qedz/image/upload/v1766415224/logo_aravalli_bgepaj.jpg`;
+        break;
+      case 'twitter':
+        shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=https://www.saafhawa.in/AravalliSatyagraha/`;
+        break;
+      case 'facebook':
+        shareUrl = `https://www.facebook.com/sharer/sharer.php?u=https://www.saafhawa.in/AravalliSatyagraha/`;
+        break;
+      default:
+        return;
+    }
+    
+    window.open(shareUrl, '_blank');
+  }
 
   const scrollToPetition = () => {
     document.getElementById('petition')?.scrollIntoView({ behavior: 'smooth' });
@@ -199,8 +219,8 @@ export default function AravalliSatyagraha() {
 
   if (submitted) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-green-900 via-green-800 to-green-900 flex items-center justify-center px-4">
-        <Card className="max-w-2xl w-full border-2 border-green-600 shadow-2xl">
+      <div className="min-h-screen bg-gradient-to-br from-green-900 via-green-800 to-green-900 flex flex-col gap-4 items-center justify-center px-4">
+        <Card className="max-w-3xl w-full border-2 border-green-600 shadow-2xl">
           <CardContent className="pt-10 pb-10 text-center space-y-6">
             <div className="w-20 h-20 mx-auto bg-green-100 rounded-full flex items-center justify-center">
               <Heart className="w-12 h-12 text-green-700 fill-green-700" />
@@ -214,16 +234,16 @@ export default function AravalliSatyagraha() {
             <p className="text-sm text-gray-600">
               Your Certificate of Participation is ready for download. Click the button below.
             </p>
-            
-              <button
-                onClick={() => downloadCertificate(certificates.url, certificates.name || 'certificate')}
-                className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-4 py-2 rounded-lg transition-all shadow-md flex items-center gap-2 mx-auto"
-              >
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                </svg>
-                Download Certificate
-              </button>
+
+            <button
+              onClick={() => downloadCertificate(certificates.url, certificates.name || 'certificate')}
+              className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-4 py-2 rounded-lg transition-all shadow-md flex items-center gap-2 mx-auto"
+            >
+              <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+              Download Certificate
+            </button>
             <Button
               onClick={() => window.location.reload()}
               className="mt-6 bg-green-800 hover:bg-green-900 text-white px-8 py-6 text-lg"
@@ -232,6 +252,38 @@ export default function AravalliSatyagraha() {
             </Button>
           </CardContent>
         </Card>
+        <div className="max-w-3xl bg-black text-white p-8 rounded-xl text-center mb-8 border-2 border-gray-800">
+          <h3 className="text-2xl font-black mb-4 flex items-center justify-center gap-2">
+            <Share2 className="w-6 h-6" />
+            Amplify the Movement
+          </h3>
+          <p className="text-gray-400 mb-6">
+            Share this petition with your friends and family. Every signature brings us closer to real change.
+          </p>
+          <div className="flex flex-wrap justify-center gap-4">
+            <button
+              onClick={() => handleShare('whatsapp')}
+              className="bg-green-600 text-white px-6 py-3 rounded-lg font-bold hover:bg-green-700 transition-colors flex items-center gap-2"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#fff" d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21c5.46 0 9.91-4.45 9.91-9.91c0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.23 8.23 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23c-1.48 0-2.93-.39-4.19-1.15l-.3-.17l-3.12.82l.83-3.04l-.2-.32a8.2 8.2 0 0 1-1.26-4.38c.01-4.54 3.7-8.24 8.25-8.24M8.53 7.33c-.16 0-.43.06-.66.31c-.22.25-.87.86-.87 2.07c0 1.22.89 2.39 1 2.56c.14.17 1.76 2.67 4.25 3.73c.59.27 1.05.42 1.41.53c.59.19 1.13.16 1.56.1c.48-.07 1.46-.6 1.67-1.18s.21-1.07.15-1.18c-.07-.1-.23-.16-.48-.27c-.25-.14-1.47-.74-1.69-.82c-.23-.08-.37-.12-.56.12c-.16.25-.64.81-.78.97c-.15.17-.29.19-.53.07c-.26-.13-1.06-.39-2-1.23c-.74-.66-1.23-1.47-1.38-1.72c-.12-.24-.01-.39.11-.5c.11-.11.27-.29.37-.44c.13-.14.17-.25.25-.41c.08-.17.04-.31-.02-.43c-.06-.11-.56-1.35-.77-1.84c-.2-.48-.4-.42-.56-.43c-.14 0-.3-.01-.47-.01"/></svg>
+              Share on WhatsApp
+            </button>
+            <button
+              onClick={() => handleShare('twitter')}
+              className="bg-blue-500 text-white px-6 py-3 rounded-lg font-bold hover:bg-blue-600 transition-colors flex items-center gap-2"
+            >
+              <Twitter className="w-5 h-5" />
+              Share on Twitter
+            </button>
+            <button
+              onClick={() => handleShare('facebook')}
+              className="bg-blue-700 text-white px-6 py-3 rounded-lg font-bold hover:bg-blue-800 transition-colors flex items-center gap-2"
+            >
+              <Facebook className="w-5 h-5" />
+              Share on Facebook
+            </button>
+          </div>
+        </div>
       </div>
     );
   }
